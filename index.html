@@ -14,32 +14,39 @@
         :root {
             --film-base:     oklch(0.10 0.01 55);
             --film-surface:  oklch(0.15 0.01 55);
+            --film-border:   oklch(0.20 0.01 55);
             --warm-white:    oklch(0.85 0.02 70);
             --amber-signal:  oklch(0.70 0.14 75);
+            --amber-dim:     oklch(0.45 0.08 75);
             --dim-white:     oklch(0.65 0.01 60);
             --signal-red:    oklch(0.50 0.16 25);
 
             --color-ground:      var(--film-base);
             --color-surface:     var(--film-surface);
+            --color-border:      var(--film-border);
             --color-text:        var(--warm-white);
             --color-text-dim:    var(--dim-white);
             --color-accent:      var(--amber-signal);
+            --color-accent-dim:  var(--amber-dim);
             --color-interactive: var(--signal-red);
 
             --font-display: 'Source Code Pro', monospace;
             --font-body:    'Source Sans 3', system-ui, sans-serif;
 
+            --text-2xl:  2rem;
             --text-xl:   1.5rem;
             --text-lg:   1.125rem;
             --text-base: 1rem;
             --text-sm:   0.8125rem;
 
             --space-2: 0.5rem;
+            --space-3: 0.75rem;
             --space-4: 1rem;
             --space-6: 1.5rem;
             --space-8: 2rem;
             --space-12: 3rem;
             --space-16: 4rem;
+            --space-20: 5rem;
         }
 
         html {
@@ -65,27 +72,39 @@
         }
 
         .page {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: var(--space-12) var(--space-4);
+            padding: var(--space-16) var(--space-6);
         }
 
-        /* ── Site Name ──────────────────────────── */
+        /* ── Header ─────────────────────────────── */
+        .site-header {
+            margin-bottom: var(--space-20);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: var(--space-8);
+        }
+
         .site-name {
             font-family: var(--font-display);
-            font-size: var(--text-xl);
+            font-size: var(--text-2xl);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.16em;
             color: var(--color-text);
-            margin-bottom: var(--space-2);
+            margin-bottom: var(--space-3);
+        }
+
+        .site-tagline {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            color: var(--color-text-dim);
+            margin-bottom: var(--space-6);
         }
 
         .site-nav {
             font-family: var(--font-display);
             font-size: var(--text-sm);
             color: var(--color-text-dim);
-            margin-bottom: var(--space-16);
         }
 
         .site-nav a {
@@ -95,28 +114,28 @@
             align-items: center;
         }
         .site-nav a:hover {
-            color: var(--color-text);
+            color: var(--color-accent);
             text-decoration: none;
         }
         .site-nav .sep {
-            margin: 0 var(--space-2);
-            color: var(--color-text-dim);
+            margin: 0 var(--space-3);
+            color: var(--color-accent-dim);
         }
 
         /* ── Divider ────────────────────────────── */
         .divider {
             text-align: center;
-            color: var(--color-text-dim);
+            color: var(--color-accent-dim);
             font-family: var(--font-display);
             font-size: var(--text-sm);
             letter-spacing: 0.5em;
-            padding: var(--space-8) 0;
+            padding: var(--space-6) 0;
             user-select: none;
         }
 
         /* ── Entry ──────────────────────────────── */
         .entry {
-            margin-bottom: var(--space-12);
+            margin-bottom: var(--space-4);
         }
 
         .entry-thumb {
@@ -128,6 +147,7 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            border: 1px solid var(--color-border);
         }
 
         .entry-thumb img {
@@ -139,18 +159,22 @@
         }
 
         .entry-thumb:hover img {
-            opacity: 0.8;
+            opacity: 0.85;
+        }
+
+        .entry-thumb:hover {
+            border-color: var(--color-accent-dim);
         }
 
         .entry-thumb .duration-badge {
             position: absolute;
-            bottom: var(--space-2);
-            right: var(--space-2);
+            bottom: var(--space-3);
+            right: var(--space-3);
             font-family: var(--font-display);
             font-size: var(--text-sm);
             color: var(--color-text);
-            background: oklch(0.10 0.01 55 / 0.85);
-            padding: 0.15em 0.5em;
+            background: oklch(0.10 0.01 55 / 0.88);
+            padding: 0.2em 0.6em;
             border-radius: 6px;
             pointer-events: none;
         }
@@ -170,9 +194,10 @@
         }
 
         .play-hint-icon {
-            width: 56px;
-            height: 56px;
-            background: oklch(0.10 0.01 55 / 0.75);
+            width: 64px;
+            height: 64px;
+            background: oklch(0.10 0.01 55 / 0.8);
+            border: 2px solid oklch(0.85 0.02 70 / 0.4);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -185,14 +210,15 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 10px 0 10px 18px;
+            border-width: 11px 0 11px 20px;
             border-color: transparent transparent transparent var(--color-text);
-            margin-left: 3px;
+            margin-left: 4px;
         }
 
         /* Embed state */
         .entry-thumb.playing {
             aspect-ratio: auto;
+            border-color: var(--color-accent-dim);
         }
 
         .entry-thumb.playing .embed-wrap {
@@ -211,18 +237,19 @@
             border-radius: 6px;
         }
 
-        .entry-meta {
+        .entry-info {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             flex-wrap: wrap;
-            gap: var(--space-2);
+            gap: var(--space-2) var(--space-4);
+            margin-bottom: var(--space-2);
         }
 
         .entry-title {
             font-family: var(--font-display);
             font-size: var(--text-lg);
-            font-weight: 400;
+            font-weight: 600;
             color: var(--color-text);
         }
 
@@ -230,8 +257,6 @@
             font-family: var(--font-display);
             font-size: var(--text-sm);
             color: var(--color-text-dim);
-            display: flex;
-            gap: var(--space-4);
             font-variant-numeric: tabular-nums;
         }
 
@@ -241,34 +266,49 @@
             min-height: 44px;
             font-family: var(--font-display);
             font-size: var(--text-sm);
-            color: var(--color-interactive);
-            margin-top: var(--space-2);
+            color: var(--color-accent);
+            letter-spacing: 0.04em;
         }
         .entry-watch:hover {
             text-decoration: none;
-            color: var(--color-accent);
+            color: var(--color-text);
         }
 
         /* ── Contact ────────────────────────────── */
-        .contact {
-            margin-top: var(--space-8);
+        .contact-section {
+            margin-top: var(--space-12);
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--space-8);
+        }
+
+        .contact-label {
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            color: var(--color-accent-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: var(--space-6);
         }
 
         .contact-line {
             font-family: var(--font-display);
             font-size: var(--text-base);
             color: var(--color-text-dim);
-            line-height: 2.2;
+            line-height: 2.4;
         }
 
         .contact-line a {
-            color: var(--color-interactive);
+            color: var(--color-accent);
+        }
+        .contact-line a:hover {
+            color: var(--color-text);
         }
 
         /* ── Footer ─────────────────────────────── */
         .site-footer {
             margin-top: var(--space-16);
             padding-top: var(--space-4);
+            border-top: 1px solid var(--color-border);
             font-family: var(--font-display);
             font-size: var(--text-sm);
             color: var(--color-text-dim);
@@ -281,10 +321,14 @@
             }
 
             .site-name {
-                font-size: 1.25rem;
+                font-size: var(--text-xl);
             }
 
-            .entry-meta {
+            .site-header {
+                margin-bottom: var(--space-12);
+            }
+
+            .entry-info {
                 flex-direction: column;
                 gap: 0.25rem;
             }
@@ -295,25 +339,30 @@
 
 <div class="page">
 
-    <div class="site-name">Skye Schelz</div>
-    <nav class="site-nav">
-        <a href="#work">Work</a>
-        <span class="sep">/</span>
-        <a href="#contact">Contact</a>
-    </nav>
+    <header class="site-header">
+        <div class="site-name">Skye Schelz</div>
+        <div class="site-tagline">Film / video / Chicago</div>
+        <nav class="site-nav">
+            <a href="#work">Work</a>
+            <span class="sep">/</span>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
     <!-- ── Work ──────────────────────────────── -->
     <div id="work">
 
         <div class="entry">
             <div class="entry-thumb" data-yt="L0L-TKM8Wxg">
-                <img src="https://img.youtube.com/vi/L0L-TKM8Wxg/hqdefault.jpg" alt="Sharkula — Church's Chicken" loading="lazy">
+                <img src="https://img.youtube.com/vi/L0L-TKM8Wxg/sddefault.jpg"
+                     onerror="this.src=this.src.replace('sddefault','hqdefault')"
+                     alt="Sharkula — Church's Chicken" loading="lazy">
                 <span class="duration-badge">2:53</span>
                 <div class="play-hint"><div class="play-hint-icon"></div></div>
             </div>
-            <div class="entry-meta">
+            <div class="entry-info">
                 <span class="entry-title">Sharkula — Church's Chicken</span>
-                <span class="entry-data"><span>2:53</span></span>
+                <span class="entry-data">2:53</span>
             </div>
             <a class="entry-watch" href="https://www.youtube.com/watch?v=L0L-TKM8Wxg" target="_blank" rel="noopener">[WATCH]</a>
         </div>
@@ -322,13 +371,15 @@
 
         <div class="entry">
             <div class="entry-thumb" data-yt="_Rcyc6qRXdg">
-                <img src="https://img.youtube.com/vi/_Rcyc6qRXdg/hqdefault.jpg" alt="im seasoned this season — sharkula" loading="lazy">
+                <img src="https://img.youtube.com/vi/_Rcyc6qRXdg/maxresdefault.jpg"
+                     onerror="this.src=this.src.replace('maxresdefault','sddefault')"
+                     alt="im seasoned this season — sharkula" loading="lazy">
                 <span class="duration-badge">0:58</span>
                 <div class="play-hint"><div class="play-hint-icon"></div></div>
             </div>
-            <div class="entry-meta">
+            <div class="entry-info">
                 <span class="entry-title">im seasoned this season — sharkula</span>
-                <span class="entry-data"><span>0:58</span></span>
+                <span class="entry-data">0:58</span>
             </div>
             <a class="entry-watch" href="https://www.youtube.com/watch?v=_Rcyc6qRXdg" target="_blank" rel="noopener">[WATCH]</a>
         </div>
@@ -337,13 +388,15 @@
 
         <div class="entry">
             <div class="entry-thumb" data-yt="iceE12Kcufk">
-                <img src="https://img.youtube.com/vi/iceE12Kcufk/hqdefault.jpg" alt="Deathcreeksaltvalley" loading="lazy">
+                <img src="https://img.youtube.com/vi/iceE12Kcufk/maxresdefault.jpg"
+                     onerror="this.src=this.src.replace('maxresdefault','sddefault')"
+                     alt="Deathcreeksaltvalley" loading="lazy">
                 <span class="duration-badge">5:41</span>
                 <div class="play-hint"><div class="play-hint-icon"></div></div>
             </div>
-            <div class="entry-meta">
+            <div class="entry-info">
                 <span class="entry-title">Deathcreeksaltvalley</span>
-                <span class="entry-data"><span>5:41</span></span>
+                <span class="entry-data">5:41</span>
             </div>
             <a class="entry-watch" href="https://www.youtube.com/watch?v=iceE12Kcufk" target="_blank" rel="noopener">[WATCH]</a>
         </div>
@@ -352,13 +405,14 @@
 
         <div class="entry">
             <div class="entry-thumb" data-yt="i6hXNeV6MN4">
-                <img src="https://img.youtube.com/vi/i6hXNeV6MN4/hqdefault.jpg" alt="My Way Usher/Frank Sinatra" loading="lazy">
+                <img src="https://img.youtube.com/vi/i6hXNeV6MN4/hqdefault.jpg"
+                     alt="My Way Usher/Frank Sinatra" loading="lazy">
                 <span class="duration-badge">4:11</span>
                 <div class="play-hint"><div class="play-hint-icon"></div></div>
             </div>
-            <div class="entry-meta">
+            <div class="entry-info">
                 <span class="entry-title">My Way Usher/Frank Sinatra</span>
-                <span class="entry-data"><span>4:11</span></span>
+                <span class="entry-data">4:11</span>
             </div>
             <a class="entry-watch" href="https://www.youtube.com/watch?v=i6hXNeV6MN4" target="_blank" rel="noopener">[WATCH]</a>
         </div>
@@ -367,13 +421,15 @@
 
         <div class="entry">
             <div class="entry-thumb" data-yt="nJl8iRamFIs">
-                <img src="https://img.youtube.com/vi/nJl8iRamFIs/hqdefault.jpg" alt="The Watering" loading="lazy">
+                <img src="https://img.youtube.com/vi/nJl8iRamFIs/maxresdefault.jpg"
+                     onerror="this.src=this.src.replace('maxresdefault','sddefault')"
+                     alt="The Watering" loading="lazy">
                 <span class="duration-badge">4:25</span>
                 <div class="play-hint"><div class="play-hint-icon"></div></div>
             </div>
-            <div class="entry-meta">
+            <div class="entry-info">
                 <span class="entry-title">The Watering</span>
-                <span class="entry-data"><span>4:25</span></span>
+                <span class="entry-data">4:25</span>
             </div>
             <a class="entry-watch" href="https://www.youtube.com/watch?v=nJl8iRamFIs" target="_blank" rel="noopener">[WATCH]</a>
         </div>
@@ -382,13 +438,15 @@
 
         <div class="entry">
             <div class="entry-thumb" data-yt="RY4Z0KG7Q1E">
-                <img src="https://img.youtube.com/vi/RY4Z0KG7Q1E/hqdefault.jpg" alt="Remy Makes Ratatouille" loading="lazy">
+                <img src="https://img.youtube.com/vi/RY4Z0KG7Q1E/maxresdefault.jpg"
+                     onerror="this.src=this.src.replace('maxresdefault','sddefault')"
+                     alt="Remy Makes Ratatouille" loading="lazy">
                 <span class="duration-badge">2:06</span>
                 <div class="play-hint"><div class="play-hint-icon"></div></div>
             </div>
-            <div class="entry-meta">
+            <div class="entry-info">
                 <span class="entry-title">Remy Makes Ratatouille</span>
-                <span class="entry-data"><span>2:06</span></span>
+                <span class="entry-data">2:06</span>
             </div>
             <a class="entry-watch" href="https://www.youtube.com/watch?v=RY4Z0KG7Q1E" target="_blank" rel="noopener">[WATCH]</a>
         </div>
@@ -398,7 +456,8 @@
     <div class="divider">* * *</div>
 
     <!-- ── Contact ───────────────────────────── -->
-    <div id="contact" class="contact">
+    <div id="contact" class="contact-section">
+        <div class="contact-label">Contact</div>
         <div class="contact-line"><a href="mailto:skye_schelz@email.com">skye_schelz@email.com</a></div>
         <div class="contact-line"><a href="https://www.instagram.com/skye_schelz/" target="_blank" rel="noopener">@skye_schelz</a></div>
         <div class="contact-line"><a href="https://www.youtube.com/@shotskye" target="_blank" rel="noopener">@shotskye</a></div>
